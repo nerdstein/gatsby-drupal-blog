@@ -1,20 +1,37 @@
-import React from 'react'
-// TODO: import query from gatsby
+import React from 'react';
+import { graphql } from 'gatsby';
+import { Link } from 'gatsby';
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
+
 // TODO: use injected data prop from query
-function IndexPage() {
+export default function IndexPage({ data }) {
   return (
     <Layout>
-      <SEO title="Home" keywords={[`blog`]} />
+      <SEO title="Your Great Blog" description="All my blog posts" />
       <h1>Hello, and welcome to the gatsby-drupal-blog!</h1>
-      {/* TODO: render list of articles */}
+      <ul>
+          {  data.allNodeArticle.edges.map((item, key) =>
+              <li><Link to={item.node.fields.slug}>{item.node.title}</Link></li>
+          )}
+      </ul>
     </Layout>
   )
 }
 
-// TODO: write query
-
-export default IndexPage
+export const indexQuery = graphql`
+{
+  allNodeArticle {
+    edges {
+      node {
+        title
+        fields {
+            slug
+        }
+      }
+    }
+  }
+}
+`;
