@@ -1,0 +1,11 @@
+.bio {
+    font-weight: bold;
+}
+
+.avatar {
+    border: 2px solid red;
+}
+
+.description {
+    font-size: 10px;
+}
